@@ -12,7 +12,7 @@ api_key = "F1CDDCD88E044EE3B932AD4F6CEF96C2"
 
 def get_locations(location, category):
     formattedLocation = string_to_query_string(location)
-    url = f"https://api.content.tripadvisor.com/api/v1/location/search?key={api_key}&searchQuery={location}&category={category}&language=en"
+    url = f"https://api.content.tripadvisor.com/api/v1/location/search?key={api_key}&searchQuery={formattedLocation}&category={category}&language=en"
 
     headers = {"accept": "application/json"}
 
