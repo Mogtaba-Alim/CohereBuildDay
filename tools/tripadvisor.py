@@ -1,18 +1,29 @@
-
-
 import requests
 from langchain.tools import tool
-from langchain_cohere.chat_models import ChatCohere
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import PromptTemplate
-import os
+from tools.tripadvisor_location_search import get_top_locations
 
-from dotenv import load_dotenv
-load_dotenv()
+api_key = "F1CDDCD88E044EE3B932AD4F6CEF96C2"
 
-prompt = PromptTemplate.from_template("""Summarize the ratings: \n {ratings}""")
-chat = ChatCohere(model="command-r-plus", temperature=0.3)
-chain = prompt | chat | StrOutputParser()
+
+def string_to_query_string(s):
+    # Replace spaces with '%20'
+    query_string = s.replace(' ', '%20')
+    return 
+
+def get_locations(location, category):
+    formattedLocation = string_to_query_string(location)
+    url = f"https://api.content.tripadvisor.com/api/v1/location/search?key={api_key}&searchQuery={location}&category={category}&language=en"
+
+    headers = {"accept": "application/json"}
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+        return data
+    else:
+        print("Error:", response.status_code)
+        return None
 
 def get_location_reviews(location_id):
     k = 30
@@ -32,12 +43,20 @@ def get_location_reviews(location_id):
                         text=f"User Rating: {review.get('rating', '')} User Review: {review.get('text', '')}"
                         )
                 )
-            return chain.invoke(dict(ratings=retrieved_ratings))    
+            return retrieved_ratings    
 
         else:
             return 'No Reviews available for this location'
     else:
         return "Failed to retrieve data from the API"
+        
+
+@tool
+def location_search(city, category) -> list:
+    "This tool is only used to find locations on tripadvisor that falls in a specific category and city provided.. Do not use it for anything else. `category` is any of the following: hotels, attractions, restaurants"
+    return get_locations(city, category)
+
+
 @tool
 def location_reviews(location_id) -> list:
     "This tool is only used to find ratings and reviews of given locations (indicated by the location_id). Do not use it for anything else."
