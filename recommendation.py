@@ -68,10 +68,24 @@ def get_city_list():
 
 
     # Define the chat history with the user's initial answers and selected country
+
     chat_history = [
-        {"role": "USER", "message": initial_answers},
-        {"role": "CHATBOT", "message": str(selected_country)}
+        {"role": "USER", "message": "These are the experiences that a person wants to have."},
+        {
+            "role": "CHATBOT",
+            "message": initial_answers,
+        },
+        {"role": "USER", "message": "Can you suggest the top country that would be a good fit for this experience? Return only the names of the country with nothing else."},
+        {
+            "role": "CHATBOT",
+            "message": str(selected_country),
+        },
     ]
+
+    # chat_history = [
+    #     {"role": "USER", "message": initial_answers},
+    #     {"role": "CHATBOT", "message": str(selected_country)}
+    # ]
 
     # Ask the chatbot to suggest a list of cities for each day of the trip
     message = f"Can you suggest a list of cities for each day of the trip in {selected_country}? Return only the list of cities that are in the country as a comma seperated list and nothing else"
@@ -85,7 +99,7 @@ def get_city_list():
     # Extract the list of cities from the API response
     cities_list = response.text.split(',')
 
-    unique_cities = list(set(cities_list))[:4]
+    unique_cities = list(set(cities_list))[:5]
 
     # Print the list of unique cities for each day of the trip
     print("Here is the list of cities for each day of your trip:")
