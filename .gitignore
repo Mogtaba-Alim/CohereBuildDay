@@ -1,0 +1,14 @@
+.env*
+volumes/
+
+
+*.ipynb
+config.txt
+.ipynb_checkpoints
+__pycache__
+*Zone.Identifier
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
