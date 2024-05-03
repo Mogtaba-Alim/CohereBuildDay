@@ -85,7 +85,7 @@ def get_city_list():
     # Extract the list of cities from the API response
     cities_list = response.text.split(',')
 
-    unique_cities = list(set(cities_list))[:4]
+    unique_cities = list(set(cities_list))[:5]
 
     # Print the list of unique cities for each day of the trip
     print("Here is the list of cities for each day of your trip:")
