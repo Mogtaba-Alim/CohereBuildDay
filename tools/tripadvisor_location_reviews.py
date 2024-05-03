@@ -1,4 +1,7 @@
+## DONT USE
+
 import requests
+from langchain.tools import tool
 
 def get_location_reviews(location_id):
     k = 30
@@ -25,3 +28,9 @@ def get_location_reviews(location_id):
     else:
         return "Failed to retrieve data from the API"
         
+
+
+@tool
+def location_reviews(location_id) -> list:
+    "This tool is only used to find ratings and reviews of given locations (indicated by the location_id). Do not use it for anything else."
+    return get_location_reviews(location_id)
