@@ -1,0 +1,9 @@
+langchain
+langchain-cohere
+python-dotenv
+tiktoken 
+faiss-cpu 
+beautifulsoup4 
+langchain_experimental 
+matplotlib
+tabulate
