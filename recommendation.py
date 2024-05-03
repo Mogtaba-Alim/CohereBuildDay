@@ -92,7 +92,7 @@ def get_city_list():
     for idx, city in enumerate(unique_cities, 1):
         print(f"Day {idx}: {city}")
 
-    return unique_cities
+    return unique_cities, experience
 
 
 # Describe the experience that you want to have: I want to have a romantic experience somewhere with a coast
