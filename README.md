@@ -1,4 +1,4 @@
-# CohereBuildDay
+# ExploreTheFeeling
 Personal Hackathon Project for Cohere's Toronto Build Daya
 
 ```bash
@@ -9,4 +9,9 @@ conda install python=3.11
 
 ```bash
 pip install -r requirements.txt
+```
+
+
+```bash
+python3 main.py
 ```
